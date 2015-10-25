@@ -1,8 +1,11 @@
 {
-  "realm": "master",
-  "realm-public-key": "MIIBIjANBgkqhkiG9w0BAQEFAAOCAQ8AMIIBCgKCAQEAlN5YMfze3Mh+ZJrgsSHojz6kKhxVZJIVZH+op+h4lHv6evr14xlA5Df4MwZA1jPPbyhhwW7+9Ej5c5iuNUipJlX+CSb1Jr+SxG7M0ba+Pm83b60rPTKFPD/TF/5//PnBdKHITvF9wsJKSYBLitmfLR70sTNGkUP9TkCUsNz2pFo9QhaZsIfxq4FKw2iIyHb8o97EbhjzgZ1DJ+Op5F2Ph8w0IU5GgvQ8l0GswJ1HYvpww1qPBcXnbD3ZkhreQezSYLC9Dtd4ZWmevuXM+ny29d2yu1EFBKCKc+K8Dojk+j/SyDeERCwMdbaAYiRNn2IpIPMiQoWz5WkmcwOvh5BkoQIDAQAB",
+  "realm": "dragons",
+  "realm-public-key": "MIIBIjANBgkqhkiG9w0BAQEFAAOCAQ8AMIIBCgKCAQEArv+GrNBF6hc21EpvoE2qil1mPQUMQnymVOQUE23tlQwMGPD0wQtCQSN4da2aw+AJlmue7E5js4uB6+LXbiHZiT2ugTmah4turRobB29ACXawfRZEp4PSifsa8Wkxc4NS02pf0kF3g35nJhl2WHjhsyDpCROIRsozqukrMIcdeFN6MtwOJQ3/dg49Ag+faWownvon/kxJeKWVJRDTo2xwmSlPM/xUN6fYXzSYLJDbR+5gttr04uvkkh3kCGpAdKiH7+3n6RjZ79nhd/oeILv+ySPP3MgobC2nOcrKToOpp+hVcyLpMnANgHQalc9k+ceu7MOrM8p4wMvI30oRhPQsbQIDAQAB",
   "auth-server-url": "https://j1keycloak-thesteve0.rhcloud.com/auth",
   "ssl-required": "external",
-  "resource": "j1-player",
-  "public-client": true
+  "resource": "j1",
+  "enable-cors" : true,
+  "credentials": {
+    "secret": "d4c4e485-2d94-4003-b09f-ad4c8bc27336"
+  }
 }
