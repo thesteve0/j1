@@ -9,6 +9,8 @@
 </head>
 
 <script>
+var keycloak = new Keycloak();
+
 window.onload = function () {
     keycloak.init({ onLoad: 'check-sso', checkLoginIframeInterval: 1 }).success(function () {
         if (keycloak.authenticated) {
