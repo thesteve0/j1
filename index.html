@@ -16,6 +16,7 @@ window.onload = function () {
         if (keycloak.authenticated) {
             authenticated();
         } else {
+        	keycloak.login()
             notAuthenticated();
         }
     } )
