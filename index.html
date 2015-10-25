@@ -24,6 +24,10 @@ window.onload = function () {
 function authenticated() {
     document.getElementById('message').innerHTML = 'User: ' + keycloak.tokenParsed['preferred_username'];
 }
+
+function notAuthenticated() {
+    document.getElementById('message').innerHTML = 'You shall not pass';
+}
 </script>
 
 <body>
