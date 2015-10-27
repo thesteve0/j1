@@ -37,7 +37,10 @@ function request() {
         req.open('GET', 'https://j1dd-thesteve0.rhcloud.com/ws/char', true);
 
         if (keycloak.authenticated) {
+            console.debug('Adding token');
             req.setRequestHeader('Authorization', 'Bearer ' + keycloak.token);
+        } else {
+            console.debug('Not authenticated!!');
         }
 
         req.onreadystatechange = function () {
