@@ -23,7 +23,7 @@ window.onload = function () {
 }
 
 function authenticated() {
-    document.getElementById('message').innerHTML = 'User: ' + keycloak.tokenParsed['preferred_username'];
+    document.getElementById('message').innerHTML = 'Email: ' + keycloak.tokenParsed['email'];
 }
 
 function notAuthenticated() {
@@ -46,7 +46,7 @@ function request() {
         req.onreadystatechange = function () {
             if (req.readyState == 4) {
                 if (req.status == 200) {
-                    output.innerHTML = 'Message: ' + JSON.parse(req.responseText).message;
+                    output.innerHTML = 'Message: ' + JSON.parse(req.responseText);
                 } else {
                     output.innerHTML = '<span class="error">' + req.status + ' ' + req.statusText + '</span>';
                 }
@@ -56,7 +56,6 @@ function request() {
         req.send();
     });
 }
-
 </script>
 
 <body>
