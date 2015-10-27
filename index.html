@@ -26,7 +26,8 @@ keycloak.onAuthLogout = function() {
 }
 
 function authenticated() {
-    document.getElementById('container').style = 'display: block;';
+    console.debug('Authenticated');
+    document.getElementById('container').style.display = 'block';
     document.getElementById('email').innerHTML = keycloak.tokenParsed['email'];
 }
 
@@ -38,8 +39,10 @@ function request() {
         req.onreadystatechange = function () {
             if (req.readyState == 4) {
                 if (req.status == 200) {
+                    console.debug('Generated character');
                     fillTable(JSON.parse(req.responseText));
                 } else {
+                    console.debug('Request failed');
                     document.getElementById('jumbotron').innerHTML = '<div class="alert alert-danger" role="alert">Request failed (' + req.status + ') </div>'
                 }
             }
