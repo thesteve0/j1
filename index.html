@@ -49,6 +49,8 @@ function request() {
         }
 
         req.send();
+    }).error(function() {
+        keycloak.login();
     });
 }
 
