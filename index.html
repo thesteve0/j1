@@ -38,11 +38,12 @@ function request() {
         req.setRequestHeader('Authorization', 'Bearer ' + keycloak.token);
         req.onreadystatechange = function () {
             if (req.readyState == 4) {
-                if (req.status == 200) {
+                var status = req.status;
+                if (status == 200) {
                     console.debug('Generated character');
                     fillTable(JSON.parse(req.responseText));
                 } else {
-                    console.debug('Request failed');
+                    console.debug('Request failed ' + status);
                     document.getElementById('jumbotron').innerHTML = '<div class="alert alert-danger" role="alert">Request failed</div>'
                 }
             }
