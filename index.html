@@ -29,6 +29,31 @@ function authenticated() {
 function notAuthenticated() {
     document.getElementById('message').innerHTML = 'You shall not pass';
 }
+
+function request() {
+    keycloak.updateToken(30).success(function() {
+        var req = new XMLHttpRequest();
+        var output = document.getElementById('message');
+        req.open('GET', 'https://j1dd-thesteve0.rhcloud.com/ws/char', true);
+
+        if (keycloak.authenticated) {
+            req.setRequestHeader('Authorization', 'Bearer ' + keycloak.token);
+        }
+
+        req.onreadystatechange = function () {
+            if (req.readyState == 4) {
+                if (req.status == 200) {
+                    output.innerHTML = 'Message: ' + JSON.parse(req.responseText).message;
+                } else {
+                    output.innerHTML = '<span class="error">' + req.status + ' ' + req.statusText + '</span>';
+                }
+            }
+        }
+
+        req.send();
+    });
+}
+
 </script>
 
 <body>
@@ -49,6 +74,8 @@ function notAuthenticated() {
 
           </section>
           <section class="col-xs-12 col-sm-6 col-md-6">
+
+                <button onclick="request()">Generate character</button>
 
                 <h2>Managing your application</h2>
 
