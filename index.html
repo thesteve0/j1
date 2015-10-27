@@ -16,37 +16,31 @@ window.onload = function () {
         if (keycloak.authenticated) {
             authenticated();
         } else {
-        	keycloak.login()
-            notAuthenticated();
+            keycloak.login()
         }
-    } )
+    });
+}
+
+keycloak.onAuthLogout = function() {
+    keycloak.login();
 }
 
 function authenticated() {
+    document.getElementById('container').style = 'display: block;';
     document.getElementById('email').innerHTML = keycloak.tokenParsed['email'];
-}
-
-function notAuthenticated() {
-    document.getElementById('app').innerHTML = 'You shall not pass';
 }
 
 function request() {
     keycloak.updateToken(30).success(function() {
         var req = new XMLHttpRequest();
-        var output = document.getElementById('message');
         req.open('GET', 'https://j1dd-thesteve0.rhcloud.com/ws/char/dd', true);
-
-        if (keycloak.authenticated) {
-            console.debug('Adding token');
-            req.setRequestHeader('Authorization', 'Bearer ' + keycloak.token);
-        } else {
-            console.debug('Not authenticated!!');
-        }
-
+        req.setRequestHeader('Authorization', 'Bearer ' + keycloak.token);
         req.onreadystatechange = function () {
             if (req.readyState == 4) {
                 if (req.status == 200) {
                     fillTable(JSON.parse(req.responseText));
+                } else {
+                    document.getElementById('jumbotron').innerHTML = '<div class="alert alert-danger" role="alert">Request failed (' + req.status + ') </div>'
                 }
             }
         }
@@ -69,7 +63,7 @@ function fillTable(char) {
 
 <body style="margin-top: 20px;">
 
-<div class="container">
+<div class="container" style="display: none;">
     <div class="header clearfix">
         <nav>
             <ul class="nav nav-pills pull-right">
