@@ -34,7 +34,7 @@ function request() {
     keycloak.updateToken(30).success(function() {
         var req = new XMLHttpRequest();
         var output = document.getElementById('message');
-        req.open('GET', 'https://j1dd-thesteve0.rhcloud.com/ws/char', true);
+        req.open('GET', 'https://j1dd-thesteve0.rhcloud.com/ws/char/dd', true);
 
         if (keycloak.authenticated) {
             console.debug('Adding token');
