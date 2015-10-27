@@ -3,8 +3,8 @@
 <head>
   <meta charset="utf-8">
   <meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1">
-  <title>Welcome to OpenShift</title>
-  <link rel="stylesheet" type="text/css" href="lib/style.css"/>
+  <title>Welcome to your D&D character</title>
+  <link rel="stylesheet" type="text/css" href="css/bootstrap.css"/>
   <script src="https://j1keycloak-thesteve0.rhcloud.com/auth/js/keycloak.js"></script>
 </head>
 
@@ -23,11 +23,11 @@ window.onload = function () {
 }
 
 function authenticated() {
-    document.getElementById('message').innerHTML = 'Email: ' + keycloak.tokenParsed['email'];
+    document.getElementById('email').innerHTML = keycloak.tokenParsed['email'];
 }
 
 function notAuthenticated() {
-    document.getElementById('message').innerHTML = 'You shall not pass';
+    document.getElementById('app').innerHTML = 'You shall not pass';
 }
 
 function request() {
@@ -46,9 +46,7 @@ function request() {
         req.onreadystatechange = function () {
             if (req.readyState == 4) {
                 if (req.status == 200) {
-                    output.innerHTML = '<pre>' + req.responseText + '</pre>';
-                } else {
-                    output.innerHTML = '<span class="error">' + req.status + ' ' + req.statusText + '</span>';
+                    fillTable(JSON.parse(req.responseText));
                 }
             }
         }
@@ -56,41 +54,37 @@ function request() {
         req.send();
     });
 }
+
+function fillTable(char) {
+    var table = '';
+    for (var prop in char) {
+        table += '<tr>';
+        table += '<td>' + prop + '</td>';
+        table += '<td>' + char[prop] + '</td>';
+        table += '</tr>'
+    }
+    document.getElementById('character').innerHTML = table;
+}
 </script>
 
-<body>
+<body style="margin-top: 20px;">
 
-<section class='container'>
-          <hgroup>
-            <h1>Welcome to your D&D character</h1>
-          </hgroup>
+<div class="container">
+    <div class="header clearfix">
+        <nav>
+            <ul class="nav nav-pills pull-right">
+                <li><span id="email"></span></li>
+                <li><a href="#" onclick="request()">Generate character</a></li>
+                <li><a href="#" onclick="keycloak.logout()">Logout</a></li>
+            </ul>
+        </nav>
+        <h3 class="text-muted">Welcome to D&D Character Generator</h3>
+    </div>
 
-
-        <div class="row">
-          <section class='col-xs-12 col-sm-6 col-md-6'>
-            <section>
-              <h2>Message</h2>
-              <div class="message" id="message"></div>
-                
-            </section>
-
-          </section>
-          <section class="col-xs-12 col-sm-6 col-md-6">
-
-                <button onclick="request()">Generate character</button>
-
-                <h2>Managing your application</h2>
-
-                <h3>Web Console</h3>
-
-
-          </section>
-       
-
-        <footer>
-          <div class="logo"><a href="https://www.openshift.com/"></a></div>
-        </footer>
-</section>
+    <div class="jumbotron">
+        <table id="character" class="table table-striped table-bordered"></table>
+    </div>
+</div>
 
 </body>
 </html>
