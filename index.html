@@ -46,7 +46,7 @@ function request() {
         req.onreadystatechange = function () {
             if (req.readyState == 4) {
                 if (req.status == 200) {
-                    output.innerHTML = 'Message: ' + JSON.parse(req.responseText);
+                    output.innerHTML = '<pre>' + req.responseText + '</pre>';
                 } else {
                     output.innerHTML = '<span class="error">' + req.status + ' ' + req.statusText + '</span>';
                 }
